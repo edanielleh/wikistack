@@ -1,6 +1,9 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:5432/wikistack');
-var models = require('models');
+var db = new Sequelize('postgres://localhost:5432/wikistack', {
+    logging: false
+});
+
+
 
 var Page = db.define('page', {
     title: {
@@ -57,17 +60,7 @@ module.exports = {
     User: User
   };
 
-module.exports = db;
 
-models.db.sync({})
-.then(function () {
-   wikistack.listen(3000, function () {
-        console.log('Server is listening on port 3001!');
-    });
-})
-.catch(console.error);
 
-var db = new Sequelize('postgres://localhost:5432/wikistack', {
-    logging: false
-});
+
 

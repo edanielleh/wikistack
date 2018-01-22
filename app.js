@@ -11,9 +11,9 @@ var nunjucks = require('nunjucks');
 var sequelize = require('sequelize');
 var models = require('./models');
 
-var db = new sequelize('postgres://localhost:5432/wikistack', {
-    logging: false
-});
+// var db = new sequelize('postgres://localhost:5432/wikistack', {
+//     logging: false
+// });
 
 nunjucks.configure('views', { noCache: true }); // where to find the views, caching off
 // have res.render work with html files
@@ -66,7 +66,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-models.db.sync({})
+models.db.sync({force: true})
 .then(function () {
     // make sure to replace the name below with your express app
     app.listen(3000, function () {
@@ -74,7 +74,7 @@ models.db.sync({})
     });
 })
 .catch(console.error);
-models.db.sync({force: true})
+
 
 module.exports = app;
 
