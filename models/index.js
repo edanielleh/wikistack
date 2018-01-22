@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var db = new Sequelize('postgres://localhost:5432/wikistack');
+var models = require('models');
 
 var Page = db.define('page', {
     title: {
@@ -21,11 +22,17 @@ var Page = db.define('page', {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
     }, 
-        getterMethods: {
-           route() {
-                return /wiki/.urlTitle;
-            }
+    route : {
+        type: Sequelize.VIRTUAL,
+        get(){
+            return this.Page('urlTitle');
         }
+    }
+        // getterMethods: {
+        //    route() {
+        //         return /wiki/.urlTitle;
+        //     }
+        // }
 });
 
 
